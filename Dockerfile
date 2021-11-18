@@ -1,0 +1,2 @@
+FROM blazerunner/blazemeter:latest
+

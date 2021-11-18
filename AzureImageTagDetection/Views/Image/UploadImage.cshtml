@@ -1,0 +1,175 @@
+﻿@model ImageViewModel
+<br />
+<link href="~/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+<script src="~/js/jquery.min.js"></script>
+<script src="~/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+    function get_detail() {
+        var size = $('#file_upload')[0].files[0].size;
+        var extension = $('#file_upload').val().replace(/^.*\./, '');
+        var tmpFlag = false;
+        switch (extension.toUpperCase()) {
+            case 'JPEG': case 'JPG': case 'PNG': case 'GIF': case 'BMP':
+                tmpFlag = true;
+                break;
+            default:
+                $("#ModelPopupText").text("Please upload .JPEG or .PNG or .GIF or .BMP file only.");
+                $("#ErrorModal").addClass("show");
+                $('#file_upload').val('');
+        }
+        if (tmpFlag) {
+            if (size > 4000000) {
+                $("#ModelPopupText").text("File size must be less than 4 MB.");
+                $("#ErrorModal").addClass("show");
+                $('#file_upload').val('');
+                tmpFlag = false;
+            } else {
+                tmpFlag = true;
+            }
+        }
+        if (!tmpFlag) {
+            $("#ErrorModal").modal("show");
+        }
+        $("#imgUploadImage").attr('src', '/Images/default-image.jpg');
+        $("#imgTagDiv").css('display', 'none');
+        $("#lblimageid").html('ImageID - xxxx');
+    }
+    function HideModelPopup() {
+        $("#ErrorModal").removeClass("show");
+        $("#ErrorModal").addClass("hide");
+    }
+    function FileValidate() {
+        if ($('#file_upload')[0].files[0] == undefined) {
+            $("#ModelPopupText").text("Please select file for upload.");
+            $("#ErrorModal").addClass("show");
+            return false;
+        }
+    }
+</script>
+
+<div class="col-md-12">
+    @using (Html.BeginForm("UploadImage", "Image", FormMethod.Post, new { enctype = "multipart/form-data", id = "img_form" }))
+    {
+        <div class="col-md-12">
+            <div class="form-row">
+                <div class="col-md-6">
+                    <h2 class="UploadHeader">Upload Image</h2>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="input-group" id="divfile">
+                                <input type="file" name="files" id="file_upload" onchange="return get_detail();" data-toggle="modal">
+                                <div class="clearfix" style="height: 10px;"></div>
+                                <button type="submit" class="btn btn-primary" onclick="return FileValidate();">
+                                    <i class="fa fa-cloud-upload" style="font-size: 15px"></i> Upload
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="form-row" id="imgTagDiv">
+                            @if (Model != null && Model.ResponseData != null)
+                            {
+                                <label style="font-weight:bold;padding-left:1.5%;" class="col-md-12">Total No. of Tags: @Model.ResponseData.Count</label>
+                            }
+                            <div class="col-md-12">
+                                @{
+                                    int i = 1;
+                                }
+                                @if (Model != null && Model.ResponseData != null)
+                                {
+                                    @foreach (var item in Model.ResponseData)
+                                    {
+                                        <div class="img-property-item">
+                                            @item.name
+                                        </div>
+                                        i++;
+                                    }
+                                    <div class="col-md-12 img-proerty-header">
+                                        <label style="font-weight:bold;">Total No. of Captions: @Model.Description.captions.Count</label>
+                                    </div>
+                                    @foreach (var captions in Model.Description.captions)
+                                    {
+                                        <div class="img-property-item">
+                                            @captions.text
+                                        </div>
+
+                                    }
+                                    if (Model.Objects != null)
+                                    {
+                                        <div class="col-md-12 img-proerty-header">
+                                            <label style="font-weight:bold;">Total No. of Objects: @Model.Objects.Where(x => x.objectName != null).ToList().Count</label>
+                                        </div>
+                                        @foreach (var objectItem in Model.Objects)
+                                        {
+
+                                            @if (objectItem.objectName != null)
+                                            {
+                                                <div class="img-property-item">
+                                                    @objectItem.objectName
+                                                </div>
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <div class="col-md-12 img-proerty-header">
+                                            <label style="font-weight:bold;"> Total No.of Objects: 0</label>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group float-left">
+                    @if (Model != null && Model.ImageId != 0)
+                    {
+                        <div class="form-row">
+                            <img class="galleryImage" src="@Model.UrlPath" asp-append-version="false" id="imgUploadImage" alt="Image" height="80%" width="100%" />
+                            <div class="clearfix"></div>
+                            <div style="text-align: center;width: 100%;"> <label id="lblimageid">ImageID - @Model.ImageId</label></div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="form-row">
+                            <img src="~/Images/default-image.jpg" asp-append-version="false" alt="Image" class="galleryImage" height="80%" width="100%" />
+                            <div class="clearfix"></div>
+                            <div style="text-align: center;width: 100%;">
+                                <label id="lblimageid">ImageID - xxxx</label>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div id="ErrorModal" class="modal fade in hide" style="display: block; padding-right: 16px;" aria-modal="true">
+    <div class="modal-dialog" style="width:25%">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Warning</h5>
+                <button type="button" class="close" data-dismiss="modal" onclick="HideModelPopup();">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="ModelPopupText"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" onclick="HideModelPopup();" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

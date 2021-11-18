@@ -1,0 +1,45 @@
+=============Error Logging ===========
+===========Start============= 6/21/2019 5:04:32 AM
+Error Message: Object reference not set to an instance of an object.
+Stack Trace:    at AzureImageTagDetection.BL.ImageTagBLManager.UploadImageAsync(IFormFile imageToUpload, String SubKey) in E:\Practice Program\ASP .NET CORE\AzureImageTagDetection\AzureImageTagDetection\BL\ImageTagBLManager.cs:line 57
+===========End============= 6/21/2019 5:04:33 AM
+=============Error Logging ===========
+===========Start============= 6/21/2019 5:55:57 AM
+Error Message: Object reference not set to an instance of an object.
+Stack Trace:    at AzureImageTagDetection.BL.ImageTagBLManager.MakeAnalysisRequest(String name, String path, String sub_key) in E:\Practice Program\ASP .NET CORE\AzureImageTagDetection\AzureImageTagDetection\BL\ImageTagBLManager.cs:line 101
+===========End============= 6/21/2019 5:55:57 AM
+=============Error Logging ===========
+===========Start============= 6/21/2019 5:57:13 AM
+Error Message: Object reference not set to an instance of an object.
+Stack Trace:    at AzureImageTagDetection.BL.ImageTagBLManager.MakeAnalysisRequest(String name, String path, String sub_key) in E:\Practice Program\ASP .NET CORE\AzureImageTagDetection\AzureImageTagDetection\BL\ImageTagBLManager.cs:line 101
+===========End============= 6/21/2019 5:57:13 AM
+=============Error Logging ===========
+===========Start============= 6/21/2019 6:00:17 AM
+Error Message: Object reference not set to an instance of an object.
+Stack Trace:    at AzureImageTagDetection.BL.ImageTagBLManager.MakeAnalysisRequest(String name, String path, String sub_key)
+===========End============= 6/21/2019 6:00:17 AM
+=============Error Logging ===========
+===========Start============= 6/21/2019 6:25:52 AM
+Error Message: Attempted to divide by zero.
+Stack Trace:    at AzureImageTagDetection.Controllers.ImageController.UploadImage(IFormFile files) in E:\Practice Program\ASP .NET CORE\AzureImageTagDetection\AzureImageTagDetection\Controllers\ImageController.cs:line 47
+===========End============= 6/21/2019 6:25:54 AM
+=============Error Logging ===========
+===========Start============= 6/21/2019 6:34:44 AM
+Error Message: Object reference not set to an instance of an object.
+Stack Trace:    at AzureImageTagDetection.BL.ImageTagBLManager.MakeAnalysisRequest(String name, String path, String sub_key) in E:\Practice Program\ASP .NET CORE\AzureImageTagDetection\AzureImageTagDetection\BL\ImageTagBLManager.cs:line 97
+===========End============= 6/21/2019 6:34:44 AM
+=============Error Logging ===========
+===========Start============= 6/21/2019 6:35:37 AM
+Error Message: Object reference not set to an instance of an object.
+Stack Trace:    at AzureImageTagDetection.BL.ImageTagBLManager.MakeAnalysisRequest(String name, String path, String sub_key) in E:\Practice Program\ASP .NET CORE\AzureImageTagDetection\AzureImageTagDetection\BL\ImageTagBLManager.cs:line 97
+===========End============= 6/21/2019 6:35:37 AM
+=============Error Logging ===========
+===========Start============= 6/21/2019 6:39:50 AM
+Error Message: An invalid request URI was provided. The request URI must either be an absolute URI or BaseAddress must be set.
+Stack Trace:    at System.Net.Http.HttpClient.PrepareRequestMessage(HttpRequestMessage request)
+   at System.Net.Http.HttpClient.SendAsync(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.PostAsync(Uri requestUri, HttpContent content, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.PostAsync(String requestUri, HttpContent content)
+   at AzureImageTagDetection.BL.ImageTagBLManager.MakeAnalysisRequest(String name, String path, String sub_key, String api_url) in E:\Practice Program\ASP .NET CORE\AzureImageTagDetection\AzureImageTagDetection\BL\ImageTagBLManager.cs:line 103
+===========End============= 6/21/2019 6:39:50 AM

@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Image>
+
+@{
+    Layout = null;
+}
+<link href="~/css/bootstrap.min.css" rel="stylesheet" />
+<script src="~/js/jquery.min.js"></script>
+<script src="~/js/bootstrap.min.js"></script>
+<br />
+<br />
+<div class="col-md-3">
+</div>
+<div class="col-md-6">
+    <div class="form-row">
+        <div class="col-md-10">
+            <center>
+                <h3>
+                    Image List
+                </h3>
+            </center>
+        </div>
+        <div class="col-md-2">
+            <input type="button" value="Create" class="btn btn-primary imageListHeaderbtn" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />
+        </div>
+    </div>
+    <table class="table table-bordered table-striped" width="50%">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    Photo
+                </th>
+                <th>
+                    Tags
+                </th>
+                <th>
+                    CreatedDate
+                </th>
+            </tr>
+        </thead>
+        @if (Model != null)
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <img class="card-img-top" src="@item.Path" asp-append-version="false" alt="Image" height="80" width="80" />
+                    </td>
+                    <td>
+                        @item.Tags
+                    </td>
+                    <td>
+                        @item.CreateDate
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+
+</div>
+
+<div class="col-md-3">
+</div>

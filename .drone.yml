@@ -1,0 +1,19 @@
+kind: pipeline
+name: default
+
+
+workspace:
+  path: /drone/src
+  
+steps:
+- name: create-test
+  image: dnyaneshwarnagre/blazemeter:1.4.2
+  pull: always
+  environment:   
+    apikey: 673e0985b554e480881605e1
+    apisecret: 570f3adadb95ce61bccb6a1097e9f0c69fa5e1d650b5040ea74aeaaa1f0d63bc5babbf0b
+    testname: Drone Pipeline Demo  
+    testid: 9874872
+    modeldata: '{"email": "\"api23@mailinator.com\"", "password": "\"Test@123\""}'
+    continuepipeline: true
+
